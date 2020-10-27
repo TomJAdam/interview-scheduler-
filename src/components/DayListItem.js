@@ -5,9 +5,10 @@ import classNames from "classnames/bind";
 
 export default function DayListItem(props) {
   function formatSpots(num) {
-    let plural;
-    num > 1 || num < 1 ? (plural = "s") : (plural = "");
-    num === 0 ? (num = "no") : (num = num);
+    let plural = num !== 1 ? "s" : "";
+    if (num === 0) {
+      num = "no";
+    }
     return `${num} spot${plural} remaining`;
   }
 
