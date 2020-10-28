@@ -4,13 +4,13 @@ import "components/DayListItem.scss";
 import classNames from "classnames/bind";
 
 export default function DayListItem(props) {
-  function formatSpots(num) {
+  const formatSpots = (num) => {
     let plural = num !== 1 ? "s" : "";
     if (num === 0) {
       num = "no";
     }
     return `${num} spot${plural} remaining`;
-  }
+  };
 
   const DayClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
