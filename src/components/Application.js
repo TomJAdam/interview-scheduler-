@@ -37,7 +37,6 @@ export default function Application(props) {
     });
   }, []);
 
-  console.log("int:", state.interviewers);
   return (
     <main className="layout">
       <section className="sidebar">

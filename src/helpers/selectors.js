@@ -1,4 +1,6 @@
 //selector functions
+
+//Appointments
 export function getAppointmentsForDay(state, day) {
   const selectedDay = state.days.find((dayItem) => dayItem.name === day);
 
@@ -12,6 +14,7 @@ export function getAppointmentsForDay(state, day) {
   return appointmentArray;
 }
 
+//Interviews
 export function getInterview(state, interview) {
   if (!interview) {
     return null;

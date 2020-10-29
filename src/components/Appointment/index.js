@@ -1,6 +1,6 @@
 //appointment
 
-import React, { Fragment } from "react";
+import React from "react";
 
 import "./styles.scss";
 
