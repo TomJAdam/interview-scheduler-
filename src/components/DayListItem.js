@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 
 export default function DayListItem(props) {
   const formatSpots = (num) => {
-    let plural = num !== 1 ? "s" : "";
+    const plural = num !== 1 ? "s" : "";
     if (num === 0) {
       num = "no";
     }
