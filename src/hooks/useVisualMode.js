@@ -3,7 +3,7 @@ import { useState } from "react";
 //used to transition between modes
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
-  //? is this necessary
+  //! is this necessary??
   const [history, setHistory] = useState([initial]);
 
   const transition = (nextMode, replace = false) => {
