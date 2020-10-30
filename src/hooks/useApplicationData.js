@@ -90,7 +90,7 @@ export default function useApplicationData() {
       }
     });
 
-    return setState((state) => ({ ...state, value: updatedDaysArray }));
+    return setState((state) => ({ ...state, days: updatedDaysArray }));
   };
 
   return { state, setDay, bookInterview, cancelInterview, spotsPerDay };
