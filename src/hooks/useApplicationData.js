@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
+    spots: 5,
     appointments: {},
     interviewers: {},
   });
 
-  //Api call
+  //Api calls
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -25,6 +26,7 @@ export default function useApplicationData() {
     });
   }, []);
 
+  //Book interview
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -39,9 +41,11 @@ export default function useApplicationData() {
         ...state,
         appointments,
       });
+      spotsPerDay(appointments, state.day);
     });
   };
 
+  //Cancel interview
   const cancelInterview = (id) => {
     const appointment = {
       ...state.appointments[id],
@@ -56,12 +60,38 @@ export default function useApplicationData() {
         ...state,
         appointments,
       });
+      spotsPerDay(appointments, state.day);
     });
   };
 
+  //Sets the selected day
   const setDay = (day) => {
     setState((prev) => ({ ...prev, day }));
   };
 
-  return { state, setDay, bookInterview, cancelInterview };
+  //Calculates spots remaining
+  const spotsPerDay = (appointments, day) => {
+    const appointmentArray = [];
+    const selectedDay = state.days.find((dayItem) => dayItem.name === day);
+
+    selectedDay.appointments.forEach((apptId) => {
+      if (!appointments[apptId].interview) {
+        appointmentArray.push(appointments[apptId].interview);
+      }
+    });
+
+    selectedDay.spots = appointmentArray.length;
+
+    const updatedDaysArray = state.days.map((day) => {
+      if (day.id === selectedDay.id) {
+        return selectedDay;
+      } else {
+        return day;
+      }
+    });
+
+    return setState((state) => ({ ...state, days: updatedDaysArray }));
+  };
+
+  return { state, setDay, bookInterview, cancelInterview, spotsPerDay };
 }

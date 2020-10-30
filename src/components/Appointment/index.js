@@ -1,7 +1,7 @@
 //appointment
 
 import React from "react";
-import { action } from "@storybook/addon-actions";
+// import { action } from "@storybook/addon-actions";
 
 import "./styles.scss";
 
@@ -35,7 +35,7 @@ export default function Appointment(props) {
   );
 
   // Save
-  function save(name, interviewer) {
+  const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer,
@@ -47,15 +47,15 @@ export default function Appointment(props) {
         transition(SHOW);
       })
       .catch((error) => transition(ERROR_SAVE, true));
-  }
+  };
 
-  function deleteInterview() {
+  const deleteInterview = () => {
     transition(DELETING, true);
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch((error) => transition(ERROR_DELETE, true));
-  }
+  };
 
   return (
     <article className="appointment">
