@@ -12,18 +12,26 @@ export default function useApplicationData() {
 
   //Api calls
   useEffect(() => {
+    const webSocket = new WebSocket("ws://localhost:8001");
     Promise.all([
       axios.get("/api/days"),
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
-    ]).then((response) => {
-      setState((prev) => ({
-        ...prev,
-        days: response[0].data,
-        appointments: response[1].data,
-        interviewers: response[2].data,
-      }));
-    });
+    ])
+      .then((response) => {
+        setState((prev) => ({
+          ...prev,
+          days: response[0].data,
+          appointments: response[1].data,
+          interviewers: response[2].data,
+        }));
+      })
+      .then(() => {
+        webSocket.send("ping");
+        webSocket.onmessage = (event) => {
+          console.log("websocket message:", event.data);
+        };
+      });
   }, []);
 
   //Book interview
@@ -93,5 +101,6 @@ export default function useApplicationData() {
     return setState((state) => ({ ...state, days: updatedDaysArray }));
   };
 
+  // Export
   return { state, setDay, bookInterview, cancelInterview, spotsPerDay };
 }
