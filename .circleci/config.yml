@@ -24,3 +24,6 @@ workflows:
   test:
     jobs:
       - build
+  testify:
+    jobs:
+      - build
