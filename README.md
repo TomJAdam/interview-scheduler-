@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+Author: Tom
+
 ## Setup
 
 Install dependencies with `npm install`.
