@@ -1,6 +1,6 @@
 # Interview Scheduler
 
-Author: Tom
+Author: Tom A
 
 ## Setup
 
