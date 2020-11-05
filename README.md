@@ -1,6 +1,22 @@
 # Interview Scheduler
 
+A React.js scheduling app.
+
 Author: Tom Adam
+
+## Technical Specifications
+
+React
+Webpack, Babel
+Axios, WebSockets
+Axios
+Storybook, Webpack Dev Server, Jest, Testing Library
+The Scheduler client application created using Create React App. Express is the basis for the Scheduler API server application.
+
+## Screen Shots
+
+![""]()
+![""]()
 
 ## Setup
 

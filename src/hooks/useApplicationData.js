@@ -12,7 +12,6 @@ export default function useApplicationData() {
 
   //Api calls
   useEffect(() => {
-    // const webSocket = new WebSocket("ws://localhost:8001");
     Promise.all([
       axios.get("/api/days"),
       axios.get("/api/appointments"),
@@ -25,12 +24,6 @@ export default function useApplicationData() {
         interviewers: response[2].data,
       }));
     });
-    // .then(() => {
-    //   webSocket.send("ping");
-    //   webSocket.onmessage = (event) => {
-    //     console.log("websocket message:", event.data);
-    //   };
-    // });
   }, []);
 
   //Book interview
