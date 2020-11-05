@@ -1,6 +1,11 @@
 import React from "react";
 
-import { render, cleanup, fireEvent } from "@testing-library/react";
+import {
+  render,
+  cleanup,
+  fireEvent,
+  getByAltText,
+} from "@testing-library/react";
 
 import Form from "components/Appointment/Form";
 
@@ -41,17 +46,21 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
-  it.skip("can successfully save after trying to submit an empty student name", () => {
+  it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
-    const { getByText, getByPlaceholderText, queryByText } = render(
-      <Form interviewers={interviewers} onSave={onSave} />
-    );
+    const {
+      getByText,
+      getByPlaceholderText,
+      queryByText,
+      getByAltText,
+    } = render(<Form interviewers={interviewers} onSave={onSave} />);
 
     fireEvent.click(getByText("Save"));
 
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
 
+    fireEvent.click(getByAltText("Sylvia Palmer"));
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
       target: { value: "Lydia Miller-Jones" },
     });
@@ -61,22 +70,23 @@ describe("Form", () => {
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
 
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
   });
 
-  it.skip("submits the name entered by the user", () => {
+  it("submits the name entered by the user", () => {
     const onSave = jest.fn();
-    const { getByText, getByPlaceholderText } = render(
+    const { getByText, getByPlaceholderText, getByAltText } = render(
       <Form interviewers={interviewers} onSave={onSave} />
     );
 
     const input = getByPlaceholderText("Enter Student Name");
 
     fireEvent.change(input, { target: { value: "Lydia Miller-Jones" } });
+    fireEvent.click(getByAltText("Sylvia Palmer"));
     fireEvent.click(getByText("Save"));
 
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
   });
 
   it("calls onCancel and resets the input field", () => {
