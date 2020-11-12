@@ -1,6 +1,9 @@
 # Interview Scheduler
 
-A React.js scheduling app.
+A React.js scheduling app. Select a day and an interviewer and book a one hour slot!
+
+API @ https://github.com/TomJAdam/scheduler-api
+Deployed @ https://5fa36247ff056e00075539dc--nervous-ramanujan-834ea4.netlify.app/
 
 Author: Tom Adam
 
